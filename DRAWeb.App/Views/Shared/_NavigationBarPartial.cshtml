@@ -1,0 +1,54 @@
+﻿<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-title">Navigation</li>
+            <li class="nav-title">Modules</li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Questionnaire"
+                   asp-action="Index"><i class="fa fa-poll-h"></i>&nbsp;Questionnaire</a>
+            </li>
+            <li class="nav-title">Summary</li>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-star"></i> Reports
+                </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Report"
+                           asp-action="UserCompetency"><i class="fas fa-file-invoice"></i>&nbsp;User Competency</a>
+                    </li>
+                </ul>
+            </li>
+
+            @*<li class="nav-title">Extras</li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-star"></i> Pages
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html" target="_top">
+                        <i class="nav-icon icon-star"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html" target="_top">
+                        <i class="nav-icon icon-star"></i> Register
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="404.html" target="_top">
+                        <i class="nav-icon icon-star"></i> Error 404
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="500.html" target="_top">
+                        <i class="nav-icon icon-star"></i> Error 500
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+        </ul>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>
