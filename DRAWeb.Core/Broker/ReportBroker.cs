@@ -1,6 +1,8 @@
 ﻿using DRAWeb.Core.Interface;
+using DRAWeb.Logger;
 using DRAWeb.Models;
 using DRAWeb.Proxy;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace DRAWeb.Core.Broker
 {
-    public class ReportBroker : IReportBroker
+    public class ReportBroker : BrokerBase, IReportBroker
     {
-        DRAAzureServiceProxy proxy = new DRAAzureServiceProxy();
+        public ReportBroker(IConfiguration _config, ILoggerManager loggerManager, IDRAAzureServiceProxy _proxy)
+        {
+            logger = loggerManager;
+            config = _config;
+            proxy = _proxy;
+        }
+
        
         public async Task<ResponseMessage<List<UserCompetencyMatrixModel>>> GetUserCompetencyMetrix(CompetenciesReportRequest request)
         {
-            ResponseMessage<List<UserCompetencyMatrixModel>> result;
-            var t = Task.Run(() => proxy.GetUserCompetencyMetrix(request));
-            t.Wait();
-            result = t.Result;
-            return result;
+            return await Task.Run(() => proxy.GetUserCompetencyMetrix(request));
         }
     }
 }

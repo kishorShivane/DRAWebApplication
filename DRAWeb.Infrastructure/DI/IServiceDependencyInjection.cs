@@ -1,6 +1,7 @@
 ﻿using DRAWeb.Core.Broker;
 using DRAWeb.Core.Interface;
 using DRAWeb.Logger;
+using DRAWeb.Proxy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +18,7 @@ namespace DRAWeb.Infrastructure.DI
             services.AddTransient<IRegistrationBroker, RegistrationBroker>();
             services.AddTransient<ILoggerManager, LoggerManager>();
             services.AddTransient<IReportBroker, ReportBroker>();
-
+            services.AddTransient<IDRAAzureServiceProxy, DRAAzureServiceProxy>();
             return services;
         }
 

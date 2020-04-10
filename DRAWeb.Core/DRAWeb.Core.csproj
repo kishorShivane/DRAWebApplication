@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DRAWeb.Logger\DRAWeb.Logger.csproj" />
     <ProjectReference Include="..\DRAWeb.Models\DRAWeb.Models.csproj" />
     <ProjectReference Include="..\DRAWeb.Proxy\DRAWeb.Proxy.csproj" />
   </ItemGroup>

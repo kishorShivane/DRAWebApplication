@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml;
-using DRAWeb.Core.Interface;
+﻿using DRAWeb.Core.Interface;
 using DRAWeb.Logger;
 using DRAWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +6,11 @@ using Microsoft.Extensions.Configuration;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Style;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
 using static DRAWeb.App.Utilities.EnumHelpers;
 
 namespace DRAWeb.App.Controllers
@@ -71,7 +70,6 @@ namespace DRAWeb.App.Controllers
         [HttpGet]
         public async Task<IActionResult> ExportExcel()
         {
-
             //step1: create array to holder header labels
             string[] col_names = new string[]{
                 "Type",

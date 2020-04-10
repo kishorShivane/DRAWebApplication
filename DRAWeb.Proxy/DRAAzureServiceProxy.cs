@@ -1,4 +1,6 @@
-﻿using DRAWeb.Models;
+﻿using DRAWeb.Logger;
+using DRAWeb.Models;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +13,17 @@ using System.Threading.Tasks;
 
 namespace DRAWeb.Proxy
 {
-    public class DRAAzureServiceProxy
+    public class DRAAzureServiceProxy : IDRAAzureServiceProxy
     {
+
+        public static ILoggerManager logger;
+        public static IConfiguration config;
+        public DRAAzureServiceProxy(IConfiguration _config, ILoggerManager loggerManager)
+        {
+            logger = loggerManager;
+            config = _config;
+        }
+
         public static void SerializeJsonIntoStream(object value, Stream stream)
         {
             using (var sw = new StreamWriter(stream, new UTF8Encoding(false), 1024, true))
@@ -72,8 +83,8 @@ namespace DRAWeb.Proxy
         public async Task<ResponseMessage<UserModel>> ValidateUserCredentials(UserModel user)
         {
             ResponseMessage<UserModel> result;
-            string azureBaseUrl = "https://draazurefunctionstest.azurewebsites.net/api/";
-            string urlQueryStringParams = "DRALogin?code=jb3ql/HRTcaJaeNK2RfozNwHCdG3g6WZnEeTU0WIBb47QRwLBDCuSA==";
+            string azureBaseUrl = config.GetValue<string>("DRAAzureAPIURL:DRAAzureAPIBaseURL");
+            string urlQueryStringParams = config.GetValue<string>("DRAAzureAPIURL:DRALoginAPIURL");
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{azureBaseUrl}{urlQueryStringParams}"))
@@ -147,7 +158,8 @@ namespace DRAWeb.Proxy
                         result = "Updated";
                     }
                     else
-                    {;
+                    {
+                        ;
                         result = JsonConvert.DeserializeObject<string>(jsonString);
                     }
                 }
