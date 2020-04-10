@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using DRAWeb.Logger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,11 +20,16 @@ namespace DRAWeb.App.Controllers
         }
         public IActionResult Index()
         {
-            
+            ViewBag.RedirectionURL = "";
             var eligibleMonths = config.GetValue<int>("AppSettings:TestEligibleAfter");
             var user = GetUserSession();
             if (user != null)
             {
+                var QuestionnaireURL = config.GetValue<string>("AppSettings:QuestionnaireURL").ToString();
+                QuestionnaireURL = QuestionnaireURL.Replace("#FN#", user.UserName);
+                QuestionnaireURL = QuestionnaireURL.Replace("#LN#", user.UserSurname);
+                QuestionnaireURL = QuestionnaireURL.Replace("#Career#", user.JobTitle);
+                ViewBag.RedirectionURL = QuestionnaireURL;
                 if (user.IsTestTaken)
                 {
                     if (DateTime.Compare(user.LastTestTakenOn.AddMonths(eligibleMonths), DateTime.Now) < 0)
@@ -40,7 +46,6 @@ namespace DRAWeb.App.Controllers
                 {
                     return View();
                 }
-
             }
             else
             {
