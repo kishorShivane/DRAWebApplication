@@ -54,8 +54,8 @@ namespace DRAWeb.Proxy
         public async Task<ResponseMessage<List<UserCompetencyMatrixModel>>> GetUserCompetencyMetrix(CompetenciesReportRequest reportRequest)
         {
             ResponseMessage<List<UserCompetencyMatrixModel>> result;
-            string azureBaseUrl = "https://draazurefunctionstest.azurewebsites.net/api/";
-            string urlQueryStringParams = "DRAReports?code=5RQwdfaVrhbptEjWzn5ciSGP8GjdmKiOjwh9B2ccpm4kbkbwaCmK5g==";
+            string azureBaseUrl = config.GetValue<string>("DRAAzureAPIURL:DRAAzureAPIBaseURL");
+            string urlQueryStringParams = config.GetValue<string>("DRAAzureAPIURL:DRAReportsAPIURL");
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{azureBaseUrl}{urlQueryStringParams}"))
@@ -112,8 +112,8 @@ namespace DRAWeb.Proxy
         public async Task<ResponseMessage<UserModel>> RegisterUser(UserModel user)
         {
             ResponseMessage<UserModel> result;
-            string azureBaseUrl = "https://draazurefunctionstest.azurewebsites.net/api/";
-            string urlQueryStringParams = "DRARegister?code=BTwW5nP9aKKRuISh0ahWGaiSDmEOisjec4Crxawm7arVaTQ7tCGVTw==";
+            string azureBaseUrl = config.GetValue<string>("DRAAzureAPIURL:DRAAzureAPIBaseURL");
+            string urlQueryStringParams = config.GetValue<string>("DRAAzureAPIURL:DRARegisterAPIURL");
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{azureBaseUrl}{urlQueryStringParams}"))
@@ -141,8 +141,8 @@ namespace DRAWeb.Proxy
         public async Task<string> UpdatePassword(ResetPassword user)
         {
             string result;
-            string azureBaseUrl = "https://draazurefunctionstest.azurewebsites.net/api/";
-            string urlQueryStringParams = "DRAResetPassword?code=epixFLZiUhG4EukalBGhA6FIqRCkTQhfzhas40UaWG0evhpyCtakqQ==";
+            string azureBaseUrl = config.GetValue<string>("DRAAzureAPIURL:DRAAzureAPIBaseURL");
+            string urlQueryStringParams = config.GetValue<string>("DRAAzureAPIURL:DRAResetPasswordAPIURL");
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{azureBaseUrl}{urlQueryStringParams}"))
@@ -170,8 +170,8 @@ namespace DRAWeb.Proxy
         public async Task<string> ActivateUser(int userID)
         {
             string result;
-            string azureBaseUrl = "https://draazurefunctionstest.azurewebsites.net/api/";
-            string urlQueryStringParams = "DRAActivateAccount?code=YrC7qctFNNaVYdz4pAtqLfJDQXidqsdvCUwH7HWMWjlMwD6O1rLJWw==";
+            string azureBaseUrl = config.GetValue<string>("DRAAzureAPIURL:DRAAzureAPIBaseURL");
+            string urlQueryStringParams = config.GetValue<string>("DRAAzureAPIURL:DRAActivateAccountAPIURL");
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{azureBaseUrl}{urlQueryStringParams}"))
